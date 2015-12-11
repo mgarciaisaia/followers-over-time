@@ -1,25 +1,19 @@
 # This is a template for a Ruby scraper on morph.io (https://morph.io)
 # including some code snippets below that you should find helpful
 
-# require 'scraperwiki'
-# require 'mechanize'
-#
-# agent = Mechanize.new
-#
-# # Read in a page
-# page = agent.get("http://foo.com")
-#
-# # Find somehing on the page using css selectors
-# p page.at('div.content')
-#
-# # Write out to the sqlite database using scraperwiki library
-# ScraperWiki.save_sqlite(["name"], {"name" => "susan", "occupation" => "software developer"})
-#
-# # An arbitrary query against the database
-# ScraperWiki.select("* from data where 'name'='peter'")
+require 'scraperwiki'
+require 'mechanize'
 
-# You don't have to do things with the Mechanize or ScraperWiki libraries.
-# You can use whatever gems you want: https://morph.io/documentation/ruby
-# All that matters is that your final data is written to an SQLite database
-# called "data.sqlite" in the current working directory which has at least a table
-# called "data".
+agent = Mechanize.new
+
+
+['cfkargentina', 'anitamontanaro', 'casarosadaar', '678elprograma', 'mauriciomacri'].each do |account|
+  page = agent.get("https://twitter.com/#{account}")
+  time = Time.now
+  followers_link = page.links.detect {|link| link.text.include? 'Followers'}
+
+  count = (followers_link.text.match /^\n\s*([^\n]+)/)[1]
+  count_without_commas = count.gsub ',', ''
+
+  ScraperWiki.save_sqlite(["followers_count"], {"account" => account, "followers" => count_without_commas, "followers_read" => count, "link_read" => followers_link.text, "time" => time})
+end
