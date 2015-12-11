@@ -15,5 +15,5 @@ agent = Mechanize.new
   count = (followers_link.text.match /^\n\s*([^\n]+)/)[1]
   count_without_commas = count.gsub ',', ''
 
-  ScraperWiki.save_sqlite(["followers_count"], {"account" => account, "followers" => count_without_commas, "followers_read" => count, "link_read" => followers_link.text, "time" => time})
+  ScraperWiki.save_sqlite(["account_time"], {"account_time" => "#{account}_#{time.strftime '%Y%m%d_%H%M%S'}", "account" => account, "followers" => count_without_commas, "followers_read" => count, "link_read" => followers_link.text, "time" => time})
 end
