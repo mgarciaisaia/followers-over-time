@@ -7,7 +7,7 @@ require 'mechanize'
 agent = Mechanize.new
 
 
-['cfkargentina', 'anitamontanaro', 'casarosadaar', '678elprograma', 'mauriciomacri', 'CasaRosada', 'presidentpinedo', 'Kicillofok', 'gabimichetti', 'horaciorlarreta', 'SergioMassa', 'danielscioli'].each do |account|
+['cfkargentina', 'anitamontanaro', 'casarosadaar', '678elprograma', 'mauriciomacri', 'CasaRosada', 'presidentpinedo', 'Kicillofok', 'gabimichetti', 'horaciorlarreta', 'SergioMassa', 'danielscioli', 'minsaurralde'].each do |account|
   page = agent.get("https://twitter.com/#{account}")
   time = Time.now
   followers_link = page.links.detect {|link| link.text.include? 'Followers'}
