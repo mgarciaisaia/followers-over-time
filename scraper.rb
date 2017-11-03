@@ -8,7 +8,7 @@ agent = Mechanize.new
 
 errors = []
 
-['cfkargentina', 'anitamontanaro', 'casarosadaar', '678elprograma', 'mauriciomacri', 'CasaRosada', 'presidentpinedo', 'Kicillofok', 'gabimichetti', 'horaciorlarreta', 'SergioMassa', 'danielscioli', 'minsaurralde', 'FuiDespedidoAR'].each do |account|
+['cfkargentina', 'anitamontanaro', 'casarosadaar', '678elprograma', 'mauriciomacri', 'CasaRosada', 'presidentpinedo', 'Kicillofok', 'gabimichetti', 'horaciorlarreta', 'SergioMassa', 'danielscioli', 'minsaurralde', 'FuiDespedidoAR', 'UniCiudadanaAR'].each do |account|
   begin
     page = agent.get("https://twitter.com/#{account}")
     time = Time.now
